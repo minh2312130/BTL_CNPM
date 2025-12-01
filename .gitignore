@@ -1,2 +1,25 @@
+# 1. Chặn thư mục thư viện (QUAN TRỌNG NHẤT)
 node_modules/
+
+# 2. Chặn các file môi trường chứa mật khẩu/bí mật
 .env
+.env.local
+.env.*.local
+
+# 3. Chặn thư mục kết quả khi build (Code xong build ra cái này)
+# Nếu dùng Vite thì nó tên là dist, dùng Create-React-App thì là build
+dist/
+build/
+
+# 4. Chặn file rác của hệ điều hành (Mac/Window hay tự sinh ra)
+.DS_Store
+Thumbs.db
+
+# 5. Chặn các file log lỗi
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 6. Chặn thư mục của editor (VS Code tự sinh ra setting riêng)
+.vscode/
+.idea/
