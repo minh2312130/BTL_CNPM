@@ -1,0 +1,581 @@
+/* ==========================================================================
+   1. GLOBAL STYLES (CẤU HÌNH CHUNG TOÀN ỨNG DỤNG)
+   ========================================================================== */
+html {
+  /* Giữ chỗ cho thanh cuộn để tránh layout bị giật khi nội dung dài ra */
+  scrollbar-gutter: stable; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif; /* Font chữ hiện đại, sạch sẽ */
+  background-color: #f4f6f8;           /* Màu nền xám nhạt dịu mắt cho toàn trang */
+}
+
+/* Container chính bao bọc toàn bộ ứng dụng */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Chiều cao full màn hình */
+}
+
+
+/* ==========================================================================
+   2. HEADER & NAVIGATION (THANH ĐIỀU HƯỚNG TRÊN CÙNG)
+   ========================================================================== */
+.main-header {
+  background-color: #3f72af; /* Màu xanh chủ đạo */
+  padding: 10px 30px;
+  display: flex;
+  justify-content: flex-start; /* Logo và menu nằm bên trái */
+  align-items: center;
+  gap: 20px;
+  color: #efece3; /* Màu chữ trắng ngà */
+}
+
+/* Container chứa các nút điều hướng (Thời gian biểu, Thư viện...) */
+.header-tabs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Style chung cho các nút trên Header */
+.nav-btn {
+  background: transparent;
+  width: 150px;
+  height: 40px;
+  border: none;
+  color: white;
+  margin: 0 5px;
+  border-radius: 15px; /* Bo tròn góc nút */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s; /* Hiệu ứng chuyển màu mượt */
+}
+
+/* Trạng thái nút đang được chọn (Active) */
+.nav-btn.active {
+  background-color: #efece3; /* Nền trắng xám */
+  color: #112d4e;            /* Chữ xanh đậm */
+  font-weight: bold;
+}
+
+/* Khu vực icon bên phải (Chuông, Cài đặt...) */
+.header-icons {
+  letter-spacing: 15px; 
+  cursor: pointer;
+  margin-left: auto; /* Đẩy toàn bộ icon sang sát lề phải */
+  display: flex;
+  align-items: center;
+}
+
+
+/* ==========================================================================
+   3. MAIN CALENDAR (LỊCH CHÍNH - React Big Calendar)
+   ========================================================================== */
+
+/* --- Header của Lịch (Hàng chứa Thứ 2, Thứ 3...) --- */
+.rbc-header {
+  background-color: #112340 !important; /* Màu xanh đậm (Deep Navy) */
+  padding: 12px 0 !important;
+  border-bottom: 1px solid #233554 !important;
+  border-left: 1px solid #233554 !important;
+  
+  /* Căn giữa nội dung Header */
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 70px; /* Tăng chiều cao header cho thoáng */
+}
+
+/* Fix lỗi cột "Hôm nay" trên header bị đổi màu mặc định */
+.rbc-header.rbc-today {
+  background-color: #112340 !important; 
+}
+
+/* --- Component Custom Header (Chứa Thứ & Ngày) --- */
+.custom-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.header-day {
+  color: #ffffff; /* Màu chữ Thứ (T2, T3...) */
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.header-date {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Làm tròn số ngày */
+}
+
+/* Vòng tròn trắng bao quanh ngày hôm nay */
+.header-date.is-today {
+  background-color: #dbe3ef;
+  color: #112340; /* Số đổi thành màu xanh đậm */
+}
+
+/* Ẩn các thành phần thừa mặc định */
+.rbc-allday-cell,            /* Dòng "All Day" */
+.rbc-current-time-indicator { /* Vạch đỏ thời gian thực */
+  display: none !important;
+}
+
+/* --- Lưới Lịch (Grid Body) --- */
+/* Màu nền cột "Hôm nay" bên dưới */
+.rbc-day-slot.rbc-today {
+  background-color: #ffffff !important; /* Giữ màu trắng sạch sẽ */
+}
+
+/* Sửa lỗi margin mặc định của container sự kiện */
+.rbc-day-slot .rbc-events-container {
+  margin-right: 0 !important;
+}
+
+/* Ẩn label giờ mặc định bên trong sự kiện (VD: "3:00 PM") */
+.rbc-event-label {
+  display: none !important;
+}
+
+/* --- Kỹ thuật "Vỏ Tàng Hình" cho Sự Kiện --- */
+/* Reset style mặc định của wrapper sự kiện để tránh vỡ layout */
+.rbc-event {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important; /* Để nội dung sát lề */
+  left: 0 !important;
+}
+
+
+/* ==========================================================================
+   4. MINI CALENDAR (LỊCH NHỎ BÊN TRÁI)
+   ========================================================================== */
+.mini-calendar-wrapper .rbc-calendar {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Thanh công cụ (Tháng + Mũi tên) */
+.mini-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 5px;
+}
+
+.mini-toolbar-label {
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: #333;
+}
+
+.mini-toolbar button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #868e96;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-toolbar button:hover {
+  background-color: #f1f3f5;
+  color: #000;
+}
+
+/* Ẩn lưới kẻ ô để giao diện sạch (Mantine Style) */
+.mini-calendar-wrapper .rbc-month-view,
+.mini-calendar-wrapper .rbc-month-row,
+.mini-calendar-wrapper .rbc-header,
+.mini-calendar-wrapper .rbc-day-bg {
+  border: none;
+}
+
+/* Header thứ (T2, T3...) của lịch nhỏ */
+.mini-calendar-wrapper .rbc-header {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  padding-bottom: 5px;
+  text-decoration: none;
+}
+
+/* Ô chứa số ngày */
+.mini-calendar-wrapper .rbc-date-cell {
+  text-align: center;
+  padding: 0;
+  font-size: 13px;
+  height: 32px;
+  line-height: 32px;
+}
+
+/* Định dạng số ngày (thẻ a) */
+.mini-calendar-wrapper .rbc-date-cell a {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: inherit;
+}
+
+.mini-calendar-wrapper .rbc-date-cell a:hover {
+  background-color: #f1f3f5;
+}
+
+/* Xóa background mặc định khi chọn ngày (vì đã xử lý trong component) */
+.mini-calendar-wrapper .rbc-day-selected {
+  background-color: transparent !important;
+}
+
+/* Ẩn ngày của tháng khác */
+.mini-calendar-wrapper .rbc-off-range-bg {
+  background: transparent;
+}
+.mini-calendar-wrapper .rbc-off-range .rbc-date-cell a {
+  color: #dee2e6; /* Màu xám mờ */
+}
+
+
+/* ==========================================================================
+   5. GENERAL MODAL STYLES (POPUP CHUNG)
+   ========================================================================== */
+
+/* Lớp phủ mờ toàn màn hình */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Màu đen mờ 50% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Luôn nổi lên trên cùng */
+  backdrop-filter: blur(2px); /* Hiệu ứng làm mờ nền */
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Khung nội dung Popup cơ bản */
+.modal-content {
+  background: white;
+  width: 450px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  padding: 20px 30px;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Header của Popup */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  width: 100%;
+  text-align: center;
+}
+
+/* Nút đóng (X) */
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  position: absolute;
+  right: 20px; top: 20px;
+}
+.close-btn:hover { color: #000; }
+
+/* Body Popup */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Các hàng thông tin (Label: Value) */
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.info-row .label {
+  width: 140px;
+  font-weight: 600;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.info-row .value {
+  color: #555;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.info-row .value.font-bold { font-weight: bold; color: #000; }
+.info-row .value.link { color: #333; text-decoration: underline; cursor: pointer; }
+
+/* Footer Popup (Chứa nút bấm) */
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Style chung cho các nút hành động */
+.btn-action {
+  padding: 8px 30px;
+  border-radius: 4px;
+  border: none;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.btn-join, .btn-edit, .btn-cancel {
+  background-color: #dbe3ef;
+  color: #333;
+}
+
+.btn-action:hover {
+  opacity: 0.9;
+  background-color: #ced6e2;
+}
+
+/* Hiệu ứng Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+/* ==========================================================================
+   6. FORM MODAL STYLES (DÀNH CHO POPUP TẠO LỚP)
+   ========================================================================== */
+.form-modal {
+  width: 620px;
+  max-width: 95%;
+  padding: 18px 22px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.form-group.half { flex: 1 1 0; }
+.form-group.quarter { flex: 0 0 130px; }
+
+/* Input field */
+.form-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #e6e9ee;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #c8d6ea;
+  box-shadow: 0 0 0 3px rgba(59,114,175,0.06);
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .form-row { flex-direction: column; }
+  .form-group.quarter { flex: 1 1 0; }
+}
+
+
+/* ==========================================================================
+   7. SESSION RECORD MODAL (POPUP BIÊN BẢN BUỔI HỌC)
+   ========================================================================== */
+
+/* Khung Popup Biên Bản */
+.session-modal-content {
+  background: white;
+  width: 600px;
+  max-width: 95%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid #444; /* Viền đen mỏng */
+}
+
+/* Header xanh nhạt */
+.session-header {
+  background-color: #8fabd4; 
+  padding: 15px 20px;
+  border-bottom: 1px solid #7a9ac5;
+}
+
+.session-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000;
+}
+
+/* Body chứa các dòng kẻ */
+.session-body {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+/* Dòng input ngang */
+.session-row {
+  border-bottom: 1px solid #ccc;
+  padding: 0;
+}
+
+.session-row.full-height {
+  flex-grow: 1;
+  border-bottom: none;
+}
+
+/* Input trong suốt (chỉ hiện placeholder) */
+.session-input {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  color: #333;
+}
+
+.session-input::placeholder { color: #999; }
+
+/* Textarea nội dung */
+.session-textarea {
+  width: 100%;
+  height: 100%;
+  padding: 15px 20px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  resize: none;
+  font-family: inherit;
+  min-height: 200px;
+}
+
+/* Footer màu kem */
+.session-footer {
+  background-color: #ecebe6;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+}
+
+/* Icon kẹp giấy */
+.icon-btn-clip {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.icon-btn-clip:hover {
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
+
+/* Nút Save/Cancel */
+.footer-right {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-session {
+  padding: 6px 25px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-session.btn-cancel {
+  background-color: #d1d5db;
+  color: #333;
+}
+
+.btn-session.btn-save {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn-session.btn-save:hover { background-color: #1976d2; }
+.btn-session.btn-cancel:hover { background-color: #9ca3af; }

@@ -1,0 +1,144 @@
+.student-page {
+  min-height: 100vh;
+  background-color: #f7f8fb;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f1a2a;
+}
+
+.student-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #1e5fb8;
+  color: #ffffff;
+}
+
+.nav-back {
+  font-weight: 600;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.tab-btn {
+  padding: 0.45rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background-color: #86aee3;
+  color: #0d1320;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background-color: #f5ddc1;
+  color: #000000;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #0d1320;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+}
+
+.student-card {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 900px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.student-card h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.student-details {
+  display: flex;
+  gap: 2rem;
+  border-top: 2px solid #e2e2e2;
+  padding-top: 1.5rem;
+}
+
+.student-info {
+  flex: 1;
+  border-right: 1px solid #dadada;
+  padding-right: 2rem;
+}
+
+.student-statistics {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.label {
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.value {
+  color: #111827;
+}
+
+.note-box {
+  width: 100%;
+  min-height: 90px;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  background-color: #f8f8f8;
+  resize: none;
+}
+
+.actions {
+  text-align: right;
+  margin-top: 1.5rem;
+}
+
+.update-btn {
+  background-color: #0b8ff5;
+  border: none;
+  border-radius: 999px;
+  color: #ffffff;
+  padding: 0.6rem 1.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .student-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .student-details {
+    flex-direction: column;
+  }
+
+  .student-info {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 1rem;
+  }
+}
